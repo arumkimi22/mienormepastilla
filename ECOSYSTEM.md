@@ -18,3 +18,13 @@ Algunos pilares del ecosistema:
 - Exploradores (BaseScan)
 - Infraestructura de oráculos y indexadores
 - Wallets y onboarding simplificado
+
+# Formatos de eventos
+
+- Workshops de smart contracts en Base
+- Spaces de Twitter/X sobre el ecosistema
+- Hackathons internos del guild
+- Sesiones de code-review
+- Meetups presenciales cuando sea posible
+
+Cualquier miembro puede proponer un evento.
