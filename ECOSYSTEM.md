@@ -42,3 +42,12 @@ Creemos en construir herramientas simples, open-source y reutilizables.
 Gracias a las comisiones tan bajas de Base, es viable crear y probar utilidades on-chain que en mainnet serían demasiado caras de iterar.
 
 Este repositorio existe para centralizar esas herramientas y facilitar su uso dentro del guild.
+# Ideas de herramientas
+
+- Scripts de deploy automatizado en Base
+- Dashboards de actividad del guild
+- Herramientas de airdrop y distribución
+- Utilidades de monitoring
+- Helpers para interactuar con contratos comunes
+
+Cualquier miembro puede proponer o contribuir una herramienta.
