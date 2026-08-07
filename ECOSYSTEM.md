@@ -51,3 +51,38 @@ Este repositorio existe para centralizar esas herramientas y facilitar su uso de
 - Helpers para interactuar con contratos comunes
 
 Cualquier miembro puede proponer o contribuir una herramienta.
+// SPDX-License-Identifier: MIT
+pragma solidity ^0.8.20;
+
+contract OwnableCounter {
+    uint256 public count;
+    address public owner;
+
+    event CountChanged(uint256 newCount);
+    event OwnershipTransferred(address indexed previousOwner, address indexed newOwner);
+
+    constructor() {
+        owner = msg.sender;
+    }
+
+    modifier onlyOwner() {
+        require(msg.sender == owner, "Not owner");
+        _;
+    }
+
+    function increment() external onlyOwner {
+        count += 1;
+        emit CountChanged(count);
+    }
+
+    function reset() external onlyOwner {
+        count = 0;
+        emit CountChanged(count);
+    }
+
+    function transferOwnership(address newOwner) external onlyOwner {
+        require(newOwner != address(0), "Invalid address");
+        emit OwnershipTransferred(owner, newOwner);
+        owner = newOwner;
+    }
+}
