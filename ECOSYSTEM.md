@@ -34,3 +34,11 @@ Cualquier miembro puede proponer un evento.
 Colección de herramientas, scripts y utilidades creadas por y para el Guild de Base.
 
 Base ofrece un entorno ideal para experimentar y crear herramientas por sus bajos costos y compatibilidad total con el ecosistema Ethereum.
+
+# Filosofía de herramientas en Base
+
+Creemos en construir herramientas simples, open-source y reutilizables.
+
+Gracias a las comisiones tan bajas de Base, es viable crear y probar utilidades on-chain que en mainnet serían demasiado caras de iterar.
+
+Este repositorio existe para centralizar esas herramientas y facilitar su uso dentro del guild.
