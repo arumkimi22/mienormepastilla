@@ -1,2 +1,0 @@
-# mienormepastilla
-hola..
