@@ -28,3 +28,9 @@ Algunos pilares del ecosistema:
 - Meetups presenciales cuando sea posible
 
 Cualquier miembro puede proponer un evento.
+
+# Base Guild Tools
+
+Colección de herramientas, scripts y utilidades creadas por y para el Guild de Base.
+
+Base ofrece un entorno ideal para experimentar y crear herramientas por sus bajos costos y compatibilidad total con el ecosistema Ethereum.
