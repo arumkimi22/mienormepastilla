@@ -362,3 +362,32 @@ contract SimpleRegistry {
         return registry[name];
     }
 }
+// SPDX-License-Identifier: MIT
+pragma solidity ^0.8.20;
+
+contract UserProfile {
+    struct Profile {
+        string name;
+        string bio;
+        uint256 createdAt;
+        bool exists;
+    }
+
+    mapping(address => Profile) public profiles;
+
+    event ProfileCreated(address indexed user, string name);
+    event ProfileUpdated(address indexed user, string name, string bio);
+
+    function createProfile(string calldata name, string calldata bio) external {
+        require(!profiles[msg.sender].exists, "Profile already exists");
+        profiles[msg.sender] = Profile(name, bio, block.timestamp, true);
+        emit ProfileCreated(msg.sender, name);
+    }
+
+    function updateProfile(string calldata name, string calldata bio) external {
+        require(profiles[msg.sender].exists, "Profile does not exist");
+        profiles[msg.sender].name = name;
+        profiles[msg.sender].bio = bio;
+        emit ProfileUpdated(msg.sender, name, bio);
+    }
+}
