@@ -391,3 +391,24 @@ contract UserProfile {
         emit ProfileUpdated(msg.sender, name, bio);
     }
 }
+// SPDX-License-Identifier: MIT
+pragma solidity ^0.8.20;
+
+contract HashStore {
+    mapping(address => bytes32) public hashes;
+
+    event HashStored(address indexed user, bytes32 hash);
+
+    function storeHash(bytes32 hash) external {
+        hashes[msg.sender] = hash;
+        emit HashStored(msg.sender, hash);
+    }
+
+    function getHash(address user) external view returns (bytes32) {
+        return hashes[user];
+    }
+
+    function verifyHash(address user, bytes32 hash) external view returns (bool) {
+        return hashes[user] == hash;
+    }
+}
