@@ -998,3 +998,25 @@ contract StepLog {
         return steps[user][index];
     }
 }
+// SPDX-License-Identifier: MIT
+pragma solidity ^0.8.20;
+
+contract NumberList {
+    uint256[] public numbers;
+
+    event NumberAdded(uint256 number, uint256 index);
+
+    function add(uint256 number) external {
+        numbers.push(number);
+        emit NumberAdded(number, numbers.length - 1);
+    }
+
+    function get(uint256 index) external view returns (uint256) {
+        require(index < numbers.length, "Index out of bounds");
+        return numbers[index];
+    }
+
+    function length() external view returns (uint256) {
+        return numbers.length;
+    }
+}
