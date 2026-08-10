@@ -1124,3 +1124,32 @@ contract CounterLog {
         return callers.length;
     }
 }
+// SPDX-License-Identifier: MIT
+pragma solidity ^0.8.20;
+
+contract EntryLog {
+    struct Entry {
+        address user;
+        string message;
+        uint256 time;
+    }
+
+    Entry[] public entries;
+
+    event EntryAdded(address indexed user, string message, uint256 index);
+
+    function addEntry(string calldata message) external {
+        entries.push(Entry(msg.sender, message, block.timestamp));
+        emit EntryAdded(msg.sender, message, entries.length - 1);
+    }
+
+    function getEntry(uint256 index) external view returns (address, string memory, uint256) {
+        require(index < entries.length, "Invalid index");
+        Entry memory e = entries[index];
+        return (e.user, e.message, e.time);
+    }
+
+    function count() external view returns (uint256) {
+        return entries.length;
+    }
+}
