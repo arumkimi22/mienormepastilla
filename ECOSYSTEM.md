@@ -1020,3 +1020,26 @@ contract NumberList {
         return numbers.length;
     }
 }
+// SPDX-License-Identifier: MIT
+pragma solidity ^0.8.20;
+
+contract IdList {
+    uint256 public nextId = 1;
+    mapping(uint256 => address) public idToOwner;
+    mapping(address => uint256[]) public ownerIds;
+
+    event IdCreated(uint256 indexed id, address indexed owner);
+
+    function createId() external returns (uint256) {
+        uint256 id = nextId;
+        nextId += 1;
+        idToOwner[id] = msg.sender;
+        ownerIds[msg.sender].push(id);
+        emit IdCreated(id, msg.sender);
+        return id;
+    }
+
+    function getIds(address user) external view returns (uint256[] memory) {
+        return ownerIds[user];
+    }
+}
