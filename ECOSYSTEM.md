@@ -850,3 +850,23 @@ contract CounterHistory {
         return history[index];
     }
 }
+// SPDX-License-Identifier: MIT
+pragma solidity ^0.8.20;
+
+contract Sequence {
+    uint256 public current;
+    mapping(address => uint256) public lastNumber;
+
+    event NumberTaken(address indexed user, uint256 number);
+
+    function next() external returns (uint256) {
+        current += 1;
+        lastNumber[msg.sender] = current;
+        emit NumberTaken(msg.sender, current);
+        return current;
+    }
+
+    function getLast(address user) external view returns (uint256) {
+        return lastNumber[user];
+    }
+}
