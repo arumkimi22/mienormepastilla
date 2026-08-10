@@ -915,3 +915,24 @@ contract UserCounter {
         return counts[user];
     }
 }
+// SPDX-License-Identifier: MIT
+pragma solidity ^0.8.20;
+
+contract ByteStore {
+    mapping(address => bytes) public data;
+
+    event DataStored(address indexed user, uint256 length);
+
+    function store(bytes calldata _data) external {
+        data[msg.sender] = _data;
+        emit DataStored(msg.sender, _data.length);
+    }
+
+    function getData(address user) external view returns (bytes memory) {
+        return data[user];
+    }
+
+    function getLength(address user) external view returns (uint256) {
+        return data[user].length;
+    }
+}
