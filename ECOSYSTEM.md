@@ -1098,3 +1098,29 @@ contract Logbook {
         return logs.length;
     }
 }
+// SPDX-License-Identifier: MIT
+pragma solidity ^0.8.20;
+
+contract CounterLog {
+    uint256 public count;
+    address[] public callers;
+    uint256[] public timestamps;
+
+    event Counted(address indexed caller, uint256 newCount, uint256 timestamp);
+
+    function increment() external {
+        count += 1;
+        callers.push(msg.sender);
+        timestamps.push(block.timestamp);
+        emit Counted(msg.sender, count, block.timestamp);
+    }
+
+    function getLog(uint256 index) external view returns (address, uint256) {
+        require(index < callers.length, "Invalid index");
+        return (callers[index], timestamps[index]);
+    }
+
+    function getLogCount() external view returns (uint256) {
+        return callers.length;
+    }
+}
