@@ -27,7 +27,6 @@ Algunos pilares del ecosistema:
 - Sesiones de code-review
 - Meetups presenciales cuando sea posible
 
-Cualquier miembro puede proponer un evento.
 
 # Base Guild Tools
 
