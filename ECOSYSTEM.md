@@ -1349,3 +1349,27 @@ contract EchoLog {
         return users.length;
     }
 }
+// SPDX-License-Identifier: MIT
+pragma solidity ^0.8.20;
+
+contract PulseLog {
+    address[] public users;
+    uint256[] public timestamps;
+
+    event Pulsed(address indexed user, uint256 timestamp, uint256 index);
+
+    function pulse() external {
+        users.push(msg.sender);
+        timestamps.push(block.timestamp);
+        emit Pulsed(msg.sender, block.timestamp, users.length - 1);
+    }
+
+    function getPulse(uint256 index) external view returns (address, uint256) {
+        require(index < users.length, "Invalid index");
+        return (users[index], timestamps[index]);
+    }
+
+    function count() external view returns (uint256) {
+        return users.length;
+    }
+}
