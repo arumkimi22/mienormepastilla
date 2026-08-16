@@ -1925,3 +1925,64 @@ contract ClickLog {
         return clickers.length;
     }
 }
+// SPDX-License-Identifier: MIT
+pragma solidity ^0.8.20;
+
+contract GuildTreasury {
+    address public owner;
+    mapping(address => bool) public isMember;
+    uint256 public memberCount;
+
+    event Deposited(address indexed from, uint256 amount);
+    event Withdrawn(address indexed to, uint256 amount);
+    event MemberAdded(address indexed member);
+    event MemberRemoved(address indexed member);
+
+    modifier onlyOwner() {
+        require(msg.sender == owner, "Not owner");
+        _;
+    }
+
+    modifier onlyMember() {
+        require(isMember[msg.sender], "Not a member");
+        _;
+    }
+
+    constructor(address[] memory initialMembers) {
+        owner = msg.sender;
+        for (uint i = 0; i < initialMembers.length; i++) {
+            isMember[initialMembers[i]] = true;
+            memberCount++;
+            emit MemberAdded(initialMembers[i]);
+        }
+    }
+
+    receive() external payable {
+        emit Deposited(msg.sender, msg.value);
+    }
+
+    function addMember(address member) external onlyOwner {
+        require(!isMember[member], "Already member");
+        isMember[member] = true;
+        memberCount++;
+        emit MemberAdded(member);
+    }
+
+    function removeMember(address member) external onlyOwner {
+        require(isMember[member], "Not a member");
+        isMember[member] = false;
+        memberCount--;
+        emit MemberRemoved(member);
+    }
+
+    function withdraw(uint256 amount, address payable to) external onlyMember {
+        require(address(this).balance >= amount, "Insufficient balance");
+        (bool success, ) = to.call{value: amount}("");
+        require(success, "Transfer failed");
+        emit Withdrawn(to, amount);
+    }
+
+    function getBalance() external view returns (uint256) {
+        return address(this).balance;
+    }
+}
